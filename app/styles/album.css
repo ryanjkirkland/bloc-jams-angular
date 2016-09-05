@@ -61,6 +61,7 @@
      display: inline-block;
      width: 28px;
      height: 28px;
+     line-height: 26px;
  }
  
  .album-song-button:hover {
