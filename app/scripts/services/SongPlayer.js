@@ -1,6 +1,17 @@
 (function() {
 	function SongPlayer() {
+
+/**
+* @desc An empty object used to assign methods and properties for use by Album Controller
+* @type {Object}
+*/
+
 		var SongPlayer = {};
+
+/**
+* @desc Holds currently playing song for use within play/pause/stop functions
+* @type {Object}
+*/
 
 		var currentSong = null;
 
@@ -31,13 +42,23 @@
 			currentSong = song;
 		};
 
+/**
+* @function playSong
+* @desc Starts playing audio fill from currentBuzzObject and sets song.playing to true
+* @param {Object} song
+*/
+
+		var playSong = function(song) {
+			currentBuzzObject.play();
+			song.playing = true;
+		};
+
 		SongPlayer.play = function(song) {
 
 			if (currentSong !== song) {
 				
 				setSong(song);
-				currentBuzzObject.play();
-				song.playing = true;
+				playSong(song);
 
 			} else if (currentSong === song) {
 				if (currentBuzzObject.isPaused()) {
