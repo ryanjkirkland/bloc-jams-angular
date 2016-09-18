@@ -1,5 +1,5 @@
 (function() {
-	function SongPlayer(Fixtures) {
+	function SongPlayer($rootScope, Fixtures) {
 
 /**
 * @desc An empty object used to assign methods and properties for use by Album Controller
@@ -39,6 +39,12 @@
 				preload: true
 			});
 
+			currentBuzzObject.bind('timeupdate', function() {
+				$rootScope.$apply(function() {
+					SongPlayer.currentTime = currentBuzzObject.getTime();
+				});
+			});
+
 			SongPlayer.currentSong = song;
 		};
 
@@ -73,6 +79,25 @@
 */
 
 		SongPlayer.currentSong = null;
+
+/**
+* @desc Current playback time (in seconds) of currently playing song
+* @type {Number}
+*/
+
+		SongPlayer.currentTime = null;
+
+/**
+* @function setCurrenttime
+* @desc Set current time (in seconds) of currently playing song
+* @param {Number} time
+*/
+
+		SongPlayer.setCurrentTime = function(time) {
+			if (currentBuzzObject) {
+				currentBuzzObject.setTime(time);
+			}
+		};
 
 		SongPlayer.play = function(song) {
 			song = song || SongPlayer.currentSong;
@@ -138,5 +163,5 @@
 
 	angular
 		.module('blocJams')
-		.factory('SongPlayer', SongPlayer);
+		.factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
 })();
