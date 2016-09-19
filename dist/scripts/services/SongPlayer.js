@@ -88,6 +88,13 @@
 		SongPlayer.currentTime = null;
 
 /**
+* @desc Current volume from 1-100
+* @type {Number}
+*/
+
+		SongPlayer.volume = null;
+
+/**
 * @function setCurrenttime
 * @desc Set current time (in seconds) of currently playing song
 * @param {Number} time
@@ -98,6 +105,19 @@
 				currentBuzzObject.setTime(time);
 			}
 		};
+
+/**
+* @function setVolume
+* @desc Uses buzz methods to control volume
+* @type Number
+*/
+
+		SongPlayer.setVolume = function(volume) {
+			if (currentBuzzObject) {
+				currentBuzzObject.setVolume(volume);
+			}
+		};
+
 
 		SongPlayer.play = function(song) {
 			song = song || SongPlayer.currentSong;
